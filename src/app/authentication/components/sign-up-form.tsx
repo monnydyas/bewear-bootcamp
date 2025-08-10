@@ -69,7 +69,7 @@ const SignUpForm = () => {
         onError: (error) => {
           if (error.error.code === "USER_ALREADY_EXISTS") {
             toast.error("E-mail já cadastrado.");
-            form.setError("email", {
+            return form.setError("email", {
               message: "E-mail já cadastrado.",
             });
           }
@@ -81,7 +81,7 @@ const SignUpForm = () => {
 
   return (
     <>
-      <Card>
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Criar conta</CardTitle>
           <CardDescription>Crie uma conta para continuar.</CardDescription>
@@ -89,7 +89,7 @@ const SignUpForm = () => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <CardContent className="grid gap-6">
+            <CardContent className="grid w-full gap-6">
               <FormField
                 control={form.control}
                 name="name"
