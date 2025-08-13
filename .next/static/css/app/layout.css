@@ -297,9 +297,6 @@
   .w-full {
     width: 100%;
   }
-  .max-w-\[150px\] {
-    max-width: 150px;
-  }
   .max-w-\[200px\] {
     max-width: 200px;
   }
@@ -314,6 +311,9 @@
   }
   .auto-rows-min {
     grid-auto-rows: min-content;
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .grid-rows-\[auto_auto\] {
     grid-template-rows: auto auto;
@@ -426,6 +426,9 @@
   .border-transparent {
     border-color: transparent;
   }
+  .bg-\[\#F4EFFF\] {
+    background-color: #F4EFFF;
+  }
   .bg-background {
     background-color: var(--background);
   }
@@ -453,11 +456,17 @@
   .bg-transparent {
     background-color: transparent;
   }
+  .bg-white {
+    background-color: var(--color-white);
+  }
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
   .p-5 {
     padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
   }
   .p-\[3px\] {
     padding: 3px;
