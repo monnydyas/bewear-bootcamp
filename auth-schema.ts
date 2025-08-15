@@ -6,7 +6,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const userTable = pgTable("user_table", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -22,7 +22,7 @@ export const user = pgTable("user", {
     .notNull(),
 });
 
-export const session = pgTable("session", {
+export const sessionTable = pgTable("session_table", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
@@ -32,16 +32,16 @@ export const session = pgTable("session", {
   userAgent: text("user_agent"),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => userTable.id, { onDelete: "cascade" }),
 });
 
-export const account = pgTable("account", {
+export const accountTable = pgTable("account_table", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => userTable.id, { onDelete: "cascade" }),
   accessToken: text("access_token"),
   refreshToken: text("refresh_token"),
   idToken: text("id_token"),
@@ -51,4 +51,17 @@ export const account = pgTable("account", {
   password: text("password"),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
+});
+
+export const verificationTable = pgTable("verification", {
+  id: text("id").primaryKey(),
+  identifier: text("identifier").notNull(),
+  value: text("value").notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date(),
+  ),
+  updatedAt: timestamp("updated_at").$defaultFn(
+    () => /* @__PURE__ */ new Date(),
+  ),
 });
