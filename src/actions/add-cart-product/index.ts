@@ -17,21 +17,17 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
   if (!session?.user) {
     throw new Error("Unauthorized");
   }
-  // Validando se existe o produto
   const productVariant = await db.query.productVariantTable.findFirst({
     where: (productVariant, { eq }) =>
-      eq(productVariant?.id, data.productVariantId),
+      eq(productVariant.id, data.productVariantId),
   });
-  // Se não existir lança uma exceção
   if (!productVariant) {
     throw new Error("Product variant not found");
   }
-  // Pegar o carrinho
   const cart = await db.query.cartTable.findFirst({
     where: (cart, { eq }) => eq(cart.userId, session.user.id),
   });
   let cartId = cart?.id;
-  // Usuário já tem um carrinho criado?
   if (!cartId) {
     const [newCart] = await db
       .insert(cartTable)
@@ -41,15 +37,11 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
       .returning();
     cartId = newCart.id;
   }
-  // Verificar se a variante já existe no carrinho
   const cartItem = await db.query.cartItemTable.findFirst({
-    where: (cartItem, { eq, and }) =>
-      and(
-        eq(cartItem.cartId, cartId),
-        eq(cartItem.productVariantId, data.productVariantId),
-      ),
+    where: (cartItem, { eq }) =>
+      eq(cartItem.cartId, cartId) &&
+      eq(cartItem.productVariantId, data.productVariantId),
   });
-  // Se tiver o produto
   if (cartItem) {
     await db
       .update(cartItemTable)
@@ -59,7 +51,6 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
       .where(eq(cartItemTable.id, cartItem.id));
     return;
   }
-  // Se não tiver o produto
   await db.insert(cartItemTable).values({
     cartId,
     productVariantId: data.productVariantId,

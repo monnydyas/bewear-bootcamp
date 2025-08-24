@@ -34,7 +34,8 @@ export const Cart = () => {
         <SheetHeader>
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
-        <div className="flex h-full flex-col px-5 pb-6">
+
+        <div className="flex h-full flex-col px-5 pb-5">
           <div className="flex h-full max-h-full flex-col overflow-hidden">
             <ScrollArea className="h-full">
               <div className="flex h-full flex-col gap-8">
@@ -42,6 +43,7 @@ export const Cart = () => {
                   <CartItem
                     key={item.id}
                     id={item.id}
+                    productVariantId={item.productVariant.id}
                     productName={item.productVariant.product.name}
                     productVariantName={item.productVariant.name}
                     productVariantImageUrl={item.productVariant.imageUrl}

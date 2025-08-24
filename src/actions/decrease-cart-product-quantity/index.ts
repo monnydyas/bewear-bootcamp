@@ -14,7 +14,6 @@ export const decreaseCartProductQuantity = async (
   data: z.infer<typeof decreaseCartProductQuantitySchema>,
 ) => {
   decreaseCartProductQuantitySchema.parse(data);
-  //   Verificando se o usuário está logado
   const session = await auth.api.getSession({
     headers: await headers(),
   });

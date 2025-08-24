@@ -36,6 +36,5 @@ export const removeProductFromCart = async (
   if (cartDoesNotBelongToUser) {
     throw new Error("Unauthorized");
   }
-  //   Se tiver o pruduto no carrinho ele deleta
   await db.delete(cartItemTable).where(eq(cartItemTable.id, cartItem.id));
 };
