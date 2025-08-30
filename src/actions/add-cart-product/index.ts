@@ -14,19 +14,24 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+
   if (!session?.user) {
-    throw new Error("Unauthorized");
+    throw new Error("Unauthorizen");
   }
+
   const productVariant = await db.query.productVariantTable.findFirst({
     where: (productVariant, { eq }) =>
       eq(productVariant.id, data.productVariantId),
   });
+
   if (!productVariant) {
     throw new Error("Product variant not found");
   }
+
   const cart = await db.query.cartTable.findFirst({
     where: (cart, { eq }) => eq(cart.userId, session.user.id),
   });
+
   let cartId = cart?.id;
   if (!cartId) {
     const [newCart] = await db
@@ -37,9 +42,10 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
       .returning();
     cartId = newCart.id;
   }
+
   const cartItem = await db.query.cartItemTable.findFirst({
     where: (cartItem, { eq }) =>
-      eq(cartItem.cartId, cartId) &&
+      eq(cartItem.cartId, cartId ?? "") &&
       eq(cartItem.productVariantId, data.productVariantId),
   });
   if (cartItem) {

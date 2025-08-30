@@ -46,7 +46,7 @@ const CartItem = ({
   });
   const increaseCartProductQuantityMutation = useMutation({
     mutationKey: ["increase-cart-product-quantity"],
-    mutationFn: () => addProductToCart({ productVariantId: id, quantity: 1 }),
+    mutationFn: () => addProductToCart({ productVariantId, quantity: 1 }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
