@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { productVariantTable } from "@/db/schema";
 
-interface VarianteSelectorProps {
+interface VariantSelectorProps {
   selectedVariantSlug: string;
   variants: (typeof productVariantTable.$inferSelect)[];
 }
@@ -11,7 +11,7 @@ interface VarianteSelectorProps {
 const VariantSelector = ({
   selectedVariantSlug,
   variants,
-}: VarianteSelectorProps) => {
+}: VariantSelectorProps) => {
   return (
     <div className="flex items-center gap-4">
       {variants.map((variant) => (

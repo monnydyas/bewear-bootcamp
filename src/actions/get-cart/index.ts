@@ -39,6 +39,7 @@ export const getCart = async () => {
       ...newCart,
       items: [],
       totalPriceInCents: 0,
+      shippingAddress: null,
     };
   }
   return {

@@ -2,7 +2,7 @@
 
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
-import { z } from "zod";
+import z from "zod";
 
 import { db } from "@/db";
 import { cartItemTable } from "@/db/schema";
@@ -14,21 +14,18 @@ export const removeProductFromCart = async (
   data: z.infer<typeof removeProductFromCartSchema>,
 ) => {
   removeProductFromCartSchema.parse(data);
-  //   Verificando se o usuário está logado
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   if (!session?.user) {
     throw new Error("Unauthorized");
   }
-  // Verificar se a variante já existe no carrinho
   const cartItem = await db.query.cartItemTable.findFirst({
     where: (cartItem, { eq }) => eq(cartItem.id, data.cartItemId),
     with: {
       cart: true,
     },
   });
-  // Verificando se tem produto no carrinho
   if (!cartItem) {
     throw new Error("Cart item not found");
   }
