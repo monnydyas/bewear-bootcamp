@@ -13,7 +13,7 @@ export const useIncreaseCartProduct = (productVariantId: string) => {
     mutationKey: getIncreaseCartProductMutationKey(productVariantId),
     mutationFn: () => addProductToCart({ productVariantId, quantity: 1 }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: getUseCartQueryKey });
+      queryClient.invalidateQueries({ queryKey: getUseCartQueryKey() });
     },
   });
 };

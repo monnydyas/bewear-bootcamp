@@ -227,7 +227,6 @@ export const orderTable = pgTable("order", {
     .notNull()
     .references(() => userTable.id, { onDelete: "cascade" }),
   shippingAddressId: uuid("shipping_address_id")
-    .notNull()
     .references(() => shippingAddressTable.id, { onDelete: "set null" }),
   recipientName: text().notNull(),
   street: text().notNull(),

@@ -53,7 +53,7 @@ const SignInForm = () => {
         },
         onError: (ctx) => {
           if (ctx.error.code === "USER_NOT_FOUND") {
-            toast.error("E-mail não envontrado.");
+            toast.error("E-mail não encontrado.");
             return form.setError("email", {
               message: "E-mail não encontrado.",
             });
@@ -96,7 +96,7 @@ const SignInForm = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Digite o seu email" {...field} />
+                      <Input placeholder="Digite seu email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -110,7 +110,7 @@ const SignInForm = () => {
                     <FormLabel>Senha</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Digite a sua senha"
+                        placeholder="Digite sua senha"
                         type="password"
                         {...field}
                       />

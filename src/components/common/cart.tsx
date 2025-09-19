@@ -3,10 +3,10 @@
 import { ShoppingBasketIcon } from "lucide-react";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { formatCentsToBRL } from "@/helpers/money";
 import { useCart } from "@/hooks/queries/use-cart";
 
-import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import {
@@ -78,7 +78,7 @@ export const Cart = () => {
               </div>
 
               <Button className="mt-5 rounded-full" asChild>
-                <Link href="/cart/identification">Finalizar a compra</Link>
+                <Link href="/cart/identification">Finalizar compra</Link>
               </Button>
             </div>
           )}
@@ -88,4 +88,4 @@ export const Cart = () => {
   );
 };
 
-// Server Action - Rota de API
+// SERVER ACTION

@@ -18,7 +18,7 @@ export const useUpdateCartShippingAddress = () => {
       updateCartShippingAddress(data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        // queryKey: getUseCartQueryKey(),
+        queryKey: getUseCartQueryKey(),
       });
     },
   });
