@@ -37,7 +37,7 @@ const Home = async () => {
           />
         </div>
 
-        <ProductList products={products} title="Mais vendidos" />
+        <ProductList products={products} title="Mais vendidos aqui" />
 
         <div className="px-5">
           <CategorySelector categories={categories} />
